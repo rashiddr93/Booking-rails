@@ -1,0 +1,165 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "basePath": "/api/v1",
+  "definitions": {
+    "user_detail": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "number",
+              "format": "int32"
+            },
+            "email": {
+              "type": "string"
+            },
+            "created_at": {
+              "type": "string"
+            },
+            "updated_at": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "dob": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "error_400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/sign_up.json": {
+      "post": {
+        "summary": "User Registration",
+        "tags": [
+          "API_V1"
+        ],
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "description": "\n        Register API for version v1\n      ",
+        "parameters": [
+          {
+            "name": "content-type",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "required": true
+                    },
+                    "password": {
+                      "type": "string",
+                      "required": true
+                    },
+                    "name": {
+                      "type": "string",
+                      "required": true
+                    },
+                    "dob": {
+                      "type": "string",
+                      "required": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfull Registeration",
+            "schema": {
+              "$ref": "#/definitions/user_detail"
+            }
+          },
+          "400": {
+            "description": "Failed to register",
+            "schema": {
+              "$ref": "#/definitions/error_400"
+            }
+          }
+        }
+      }
+    },
+    "api/v1/sign_in.json": {
+      "post": {
+        "summary": "Users Sign In",
+        "tags": [
+          "API_V1"
+        ],
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "description": "\n        Login API for version v1\n      ",
+        "parameters": [
+          {
+            "name": "content-type",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "required": true
+                    },
+                    "password": {
+                      "type": "string",
+                      "required": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "User SignIn Successfully",
+            "schema": {
+              "$ref": "#/definitions/user_detail"
+            }
+          }
+        }
+      }
+    }
+  }
+}
